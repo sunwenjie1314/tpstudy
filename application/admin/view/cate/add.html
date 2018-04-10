@@ -1,0 +1,202 @@
+{include file="public/head"}
+<!-- /Head -->
+<!-- Body -->
+<body>
+<!-- Navbar -->
+{include file="public/navbar"}
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="public/sidebar"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">首页</a>
+                    </li>
+                    <li class="active"><a href="#">栏目管理</a></li>
+                    <li class="active">新增栏目</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget flat radius-bordered">
+                            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                                <div class="widget-body">
+                                    <div class="widget-main ">
+                                        <div class="tabbable">
+                                            <ul class="nav nav-tabs tabs-flat" id="myTab9">
+                                                <li class="active">
+                                                    <a data-toggle="tab" href="#basic_setting">
+                                                        基本信息设置
+                                                    </a>
+                                                </li>
+                                                <li class="tab-red">
+                                                    <a data-toggle="tab" href="#enclosure_setting">
+                                                       SEO设置
+                                                    </a>
+                                                </li>
+                                                <li class="tab-red">
+                                                    <a data-toggle="tab" href="#profile13">
+                                                        附件设置
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content tabs-flat">
+                                                <div id="basic_setting" class="tab-pane active">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">上级栏目: </label>
+                                                        <div class="col-sm-6">
+                                                            <select>
+                                                                <option>顶级栏目</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">栏目名称: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">是否隐藏栏目:</label>
+                                                        <div class="col-sm-6">
+                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                <label >
+                                                                    <input checked="checked"  name="visible" value=""  type="radio">
+                                                                    <span class="text">是</span>
+                                                                </label>
+
+                                                            </div>
+                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                <label>
+                                                                    <input checked=""  name="visible" value=""  type="radio">
+                                                                    <span class="text">否</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">栏目图标: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="" placeholder="" name=""  value="" type="file">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">栏目属性: </label>
+                                                        <div class="col-sm-6">
+                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                <label >
+                                                                    <input checked="checked"  name="1111" value=""  type="radio">
+                                                                    <span class="text">封面频道栏目</span>
+                                                                </label>
+
+                                                            </div>
+                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                <label>
+                                                                    <input checked=""  name="1111" value=""  type="radio">
+                                                                    <span class="text">列表页栏目</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">封面频道栏目模板: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">列表页模板: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">内容页模板: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                </div>
+                                                <div id="enclosure_setting" class="tab-pane">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">栏目标题: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">关键词: </label>
+                                                        <div class="col-sm-6">
+                                                            <input class="form-control" placeholder="" name="keywords"  value="" type="text">
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">描述: </label>
+                                                        <div class="col-sm-6">
+                                                           <textarea class="form-control">
+
+                                                           </textarea>
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                </div>
+                                                <div id="profile13" class="tab-pane">
+                                                    <div class="form-group">
+                                                        <div class="widget-main no-padding">
+                                                            <div id="summernote"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-primary">保存信息</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Body -->
+    </div>
+    <!-- /Page Content -->
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+
+</div>
+<!--Basic Scripts-->
+{include file="public/foot"}
+<script src="__ADMIN__/js/editors/summernote/summernote.js"></script>
+<script>
+    $('#summernote').summernote({ height: 300 });
+</script>
+</body>
+<!--  /Body -->
+</html>
