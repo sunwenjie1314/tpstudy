@@ -53,9 +53,6 @@ class User extends Common{
                 }else{
                     $this->error('添加用户失败!');
                 }}
-//            dump($data);
-//            die();
-
         }catch(TemplateNotFoundException $e){
             return exception($e);
         }

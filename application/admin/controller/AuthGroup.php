@@ -13,9 +13,6 @@ class AuthGroup extends Common{
             $authGroup=new AuthGroupModel();
             $roleres=$authGroup->paginate(5,false);
             $page = $roleres->render();
-//            $rr=$roleres->total();
-//             dump($rr);
-//            die();
             $this->assign('page',$page);
             $this->assign('roleres',$roleres);
             return $this->view->fetch('list');

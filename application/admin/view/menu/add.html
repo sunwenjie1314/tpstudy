@@ -42,11 +42,9 @@
                                             <div class="col-sm-6">
                                                 <select class="form-control" name="parent_id" >
                                                     <option selected="selected" value="1">顶级菜单</option>
-                                                    <option  value="2">单选按钮</option>
-                                                    <option  value="3">复选框</option>
-                                                    <option  value="4">下拉框</option>
-                                                    <option  value="5">文本域</option>
-                                                    <option  value="6">附件</option>
+                                                    {volist name="menus" id="vo"}
+                                                    <option  value="{$vo.id}"><?php echo str_repeat('-',$vo['level']*2); ?>{$vo.name}</option>
+                                                    {/volist}
                                                 </select>
                                             </div>
                                         </div>
@@ -61,8 +59,8 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label no-padding-right">应用类型:</label>
                                             <div class="col-sm-6">
-                                                <input class="form-control" id="type" placeholder="请输入应用的类型"
-                                                       name="type" type="text">
+                                                <input class="form-control" id="app" placeholder="请输入应用的类型"
+                                                       name="app" type="text">
                                             </div>
                                             <p class="help-block col-sm-4 red">* 必填</p>
                                         </div>
@@ -96,14 +94,14 @@
                                             <div class="radio" style="float:left; padding-left:10px;">
                                                 <label >
                                                     <input checked="checked"  name="type" value="1"  type="radio">
-                                                    <span class="text">是</span>
+                                                    <span class="text">菜单+权限</span>
                                                 </label>
 
                                             </div>
                                             <div class="radio" style="float:left; padding-left:10px;">
                                                 <label>
                                                     <input checked=""  name="type" value="0"  type="radio">
-                                                    <span class="text">否</span>
+                                                    <span class="text">菜单</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -145,7 +143,7 @@
                                             <label class="col-sm-2 control-label no-padding-right">排序方式:</label>
                                             <div class="col-sm-6">
                                                 <input class="form-control" id="list_order" placeholder="请输入网站的中文名称"
-                                                       name="list_orde" type="text">
+                                                       name="list_order" type="text">
                                             </div>
                                             <p class="help-block col-sm-4 red">* 必填</p>
                                         </div>
@@ -171,7 +169,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </form>
                         </div>
                     </div>
