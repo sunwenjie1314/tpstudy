@@ -9,14 +9,14 @@ namespace app\admin\model;
 
 use think\Model;
 
-class Menu extends Model{
-    public function menutree($menus){
+class Cate extends Model{
+    public function trees($menus){
         return $this->tree($menus);
     }
     public function tree($arr,$pid=0,$level=0){
         static $tree = array();
         foreach($arr as $v){
-            if($v['parent_id']==$pid){
+            if($v['pid']==$pid){
                 //说明找到，保存
                 $v['level'] = $level;
                 $tree[] = $v;
@@ -25,5 +25,13 @@ class Menu extends Model{
             }
         }
         return $tree;
+    }
+    public function getStatusAttr($value)
+    {
+        $status = [
+            0 => '隐藏',
+            1 => '显示'
+        ];
+        return $status[$value];
     }
 }

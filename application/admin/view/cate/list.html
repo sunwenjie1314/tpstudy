@@ -42,27 +42,42 @@
                                     <table class="table table-striped table-hover table-bordered dataTable no-footer" id="editabledatatable" role="grid" aria-describedby="editabledatatable_info">
                                         <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Username
-                                                : activate to sort column descending" style="width: 68px;">ID
+                                            <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 10%; text-align: center">
+                                                <label>
+                                                    <input type="checkbox" class="colored-blue" name="contatway[]"/>
+                                                    <span class="text">全选</span>
+                                                </label>
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-label="Full Name
-                                                : activate to sort column ascending" style="width: 167px;">中文名称</th>
-                                            <th class="sorting" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-label="Points
-                                                : activate to sort column ascending" style="width: 180px;">英文名称</th>
-                                            <th class="sorting" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-label="Notes
-                                                : activate to sort column ascending" style="width: 265px;">类型</th>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=" "style="width: 440px;">所属面板</th>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=" "style="width: 440px;">值或默认值</th>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=" "style="width: 440px;">可选值</th>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=" "style="width: 440px;">操作</th>
+                                            <th style="width: 5%; text-align: center">ID</th>
+                                            <th style="width: 18%;">栏目</th>
+                                            <th style="width: 10%; text-align: center">状态</th>
+                                            <th style="width: 18%;">属性</th>
+                                            <th style="width: 18%;">所属模型</th>
+                                            <th style="width:4%; text-align: center">排序</th>
+                                            <th style="width: 17%; text-align: center">操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-
+                                        {volist name="cateRes" id="vo"}
                                         <tr role="row">
-
-                                        </tr>
-
+                                            <td style="text-align: center;">
+                                                <label>
+                                                    <input type="checkbox"  class="colored-blue" name="contatway[]"/> <span class="text"></span>
+                                                </label>
+                                            </td>
+                                            <td>{$vo.id}</td>
+                                            <td><?php echo str_repeat('--',$vo['level']*2); ?>{$vo.cate_name}</td>
+                                            <td  {if condition="$vo['status'] eq 1"} style="text-align: center;">
+                                                <a class="btn btn-success">显示</a>
+                                                {else/}
+                                                <a class="btn btn-danger">隐藏</a>{/if}
+                                            </td>
+                                            <td>{$vo.cate_attr}</td>
+                                            <td>{$vo.model_id}</td>
+                                            <td><input type="text" value="{$vo.sort}" style="width: 20px; text-align: center;"/></td>
+                                            <td>操作</td>
+                                         </tr>
+                                        {/volist}
                                         </tbody>
                                     </table>
                                 </div>
@@ -102,6 +117,8 @@
 </div>
 <!--Basic Scripts-->
 {include file="public/foot"}
+<script type="text/javascript">
+</script>
 </body>
 <!--  /Body -->
 </html>

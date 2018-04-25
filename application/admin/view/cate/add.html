@@ -70,6 +70,9 @@
                                                         <div class="col-sm-6">
                                                             <select name="pid">
                                                                 <option value="0">顶级栏目</option>
+                                                                {volist name="cateTree" id="vo"}
+                                                                <option value="{$vo.id}"><?php echo str_repeat('--',$vo['level']*2); ?>{$vo.cate_name}</option>
+                                                                {/volist}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -101,6 +104,7 @@
                                                         <label class="col-sm-2 control-label no-padding-right">栏目图标: </label>
                                                         <div class="col-sm-6">
                                                             <span id="uploadify"></span>
+                                                            <input name="img" value="" type="hidden">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
@@ -173,9 +177,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">描述: </label>
                                                         <div class="col-sm-6">
-                                                           <textarea class="form-control" name="desc">
-
-                                                           </textarea>
+                                                           <textarea class="form-control" name="desc"></textarea>
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
@@ -238,8 +240,6 @@
         });
         $("#uploadify-button").removeAttr('style');//移除原来的图标样式
     })
-</script>
-<script>
     $('#summernote').summernote({ height: 300 });
 </script>
 </body>

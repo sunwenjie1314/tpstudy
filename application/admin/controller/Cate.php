@@ -8,17 +8,30 @@
 namespace app\admin\controller;
 class Cate extends Common{
     public function cate_list(){
+        $_cateRes=db('cate')->select();
+        $cateRes=model('cate')->trees($_cateRes);
+        $this->assign([
+            'cateRes'=>$cateRes
+        ]);
         return $this->view->fetch('list');
     }
     public function cate_add(){
         if(request()->isPost()){
             $data=input('post.');
-            dump($data);
-            die();
+            $add=db('cate')->insert($data);
+            if ($add){
+                $this->success('添加栏目成功!',url('cate_list'));
+            }
+            else{
+                $this->error('添加栏目失败!');
+            }
             return;
         }
         $modelRes=db('model')->field('id,model_name')->select();
-        $this->assign(['modelRes'=>$modelRes]);
+        $cateRes=db('cate')->select();
+        $cateTree=model('cate')->trees($cateRes);
+        $this->assign(['modelRes'=>$modelRes,'cateTree'=>$cateTree
+        ]);
         return $this->view->fetch('add');
     }
     public function upImg(){
