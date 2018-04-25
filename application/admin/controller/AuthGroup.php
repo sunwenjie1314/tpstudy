@@ -37,4 +37,27 @@ class AuthGroup extends Common{
         }
         return $this->view->fetch('add');
     }
+    public function auth_power(){
+        if(request()->isPost()){
+            $powers=input('post.');
+            dump($powers);
+            die();
+        }
+        $data=db('menu')->where(['parent_id'=>0])->select();
+        foreach ($data as $k=>$v){
+            $data[$k]['children']=db('menu')->where(['parent_id'=>$v['id']])->select();
+            foreach ( $data[$k]['children'] as $k1 =>$v1){
+                $data[$k]['children'][$k1]['children']=db('menu')->where(['parent_id'=>$v1['id']])->select();
+            }
+        }
+        $id=input('id');
+        $authGroups=db('authGroup')->find($id);
+        $rules=explode(',',$authGroups['rules']);
+        $this->assign([
+            'power'=>$authGroups,
+            'data'=>$data,
+            'rules'=>$rules
+            ]);
+        return $this->view->fetch('power');
+    }
 }

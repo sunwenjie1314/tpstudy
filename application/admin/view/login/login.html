@@ -1,0 +1,170 @@
+{include file="public/head"}
+<!-- /Head -->
+<!-- Body -->
+<body>
+<!-- Navbar -->
+{include file="public/navbar"}
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="public/sidebar"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">首页</a>
+                    </li>
+                    <li class="active"><a href="#">栏目管理</a></li>
+                    <li class="active">新增栏目</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget flat radius-bordered">
+                            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+                                <div class="widget-body">
+                                    <div class="widget-header bordered-bottom bordered-sky">
+                                        <span class="widget-caption">新增菜单</span>
+                                    </div><!--Widget Header-->
+                                    <div class="widget-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">父级菜单:</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" name="parent_id" >
+                                                    <option selected="selected" value="1">顶级菜单</option>
+                                                    {volist name="menus" id="vo"}
+                                                    <option  value="{$vo.id}"><?php echo str_repeat('-',$vo['level']*2); ?>{$vo.name}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">菜单名称:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="name" placeholder="请输入网站的中文名称"
+                                                       name="name" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">应用类型:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="app" placeholder="请输入应用的类型"
+                                                       name="app" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">应用模块:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="model" placeholder="请输入应用模块名"
+                                                       name="model" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">应用操作:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="action" placeholder="请输入应用操作名"
+                                                       name="action" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">URL参数:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="url_param" placeholder="请输入URL参数"
+                                                       name="url_param" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                        <label class="col-sm-2 control-label no-padding-right">菜单类型:</label>
+                                        <div class="col-lg-2">
+                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                <label >
+                                                    <input checked="checked"  name="type" value="1"  type="radio">
+                                                    <span class="text">菜单+权限</span>
+                                                </label>
+
+                                            </div>
+                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                <label>
+                                                    <input checked=""  name="type" value="0"  type="radio">
+                                                    <span class="text">菜单</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                            <label class="col-sm-2 control-label no-padding-right">是否显示:</label>
+                                            <div class="col-lg-2">
+                                                <div class="radio" style="float:left; padding-left:10px;">
+                                                    <label >
+                                                        <input checked="checked"  name="status" value="1"  type="radio">
+                                                        <span class="text">是</span>
+                                                    </label>
+
+                                                </div>
+                                                <div class="radio" style="float:left; padding-left:10px;">
+                                                    <label>
+                                                        <input checked=""  name="status" value="0"  type="radio">
+                                                        <span class="text">否</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">菜单图标:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="icon" placeholder="请输入网站的中文名称"
+                                                       name="icon" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">备注:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="remark" placeholder="请输入菜单的图标"
+                                                       name="remark" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary">保存信息</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Body -->
+    </div>
+    <!-- /Page Content -->
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+
+</div>
+<!--Basic Scripts-->
+{include file="public/foot"}
+<script src="__ADMIN__/js/editors/summernote/summernote.js"></script>
+<script>
+    $('#summernote').summernote({ height: 300 });
+</script>
+</body>
+<!--  /Body -->
+</html>

@@ -9,6 +9,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
+use think\Session;
 
 class Common extends Controller{
     public function _initialize()
@@ -16,8 +17,11 @@ class Common extends Controller{
         parent::_initialize(); //
         $request=Request::instance();
         $conf=$request->controller();    //获取当前控制器的名称
+
        // $action=$request->action();    //获取当前方法的名称
         $this->assign('conf',$conf);
+
+        define('USER_ID', Session::get('user_id'));       //静态的定义“USER_ID”这个常量，用于后续的判定操作。USER_ID就是SESSION中的用户id。
     }
     public function positon($cid){
         static $pos = array();
@@ -35,4 +39,18 @@ class Common extends Controller{
         }
         return array_reverse($pos);
     }
+    //判断用户是否登录，放在后台的入口文件中：index/index    即index控制的index方法中
+//    protected function isLogin()
+//    {
+//        if (empty(USER_ID)) {
+//            $this->error('用户未登录，无权访问!', url('Login/login'));
+//        }
+//    }
+//    //防止用户重复登录
+//    protected function alreadyLogin()
+//    {
+//        if (!empty(USER_ID)) {
+//            $this->error('用户已经登录,请勿重复登录!', url('index/index'));
+//        }
+//    }
 }

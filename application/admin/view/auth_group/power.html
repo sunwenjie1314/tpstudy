@@ -1,0 +1,111 @@
+{include file="public/head"}
+
+<!-- /Head -->
+<!-- Body -->
+<body>
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <div class="page-container">
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget flat radius-bordered">
+                            <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="power">
+                                <div class="widget-body">
+                                    <div class="widget-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">角色名称:</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="name" placeholder="请输入角色名称"
+                                                       name="title" type="text" value="{$power.title}">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">是否启用:</label>
+                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                <label >
+                                                    <input  name="status" value="1"  type="radio" {if condition="$power.status eq '1'"}checked='checked'{/if}>
+                                                    <span class="text">是</span>
+                                                </label>
+                                                <label style="margin-left: 20px;">
+                                                    <input  name="status" value="0"  type="radio" {if condition="$power.status eq '0'"}checked ='checked' {/if} >
+                                                    <span class="text">否</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label no-padding-right">分配权限</label>
+                                            <div class="col-sm-9">
+                                                <!-- 权限分配 -->
+                                                <table>
+                                                    <tbody>
+                                                    {foreach name="data" item="vo"}
+                                                    <tr>
+                                                        <td class="op-cl-1">
+                                                            <label class="option"><input type="checkbox" name="rules[]"  class="checkbox-parent" dataid="id-1">{$vo.name}</label>
+                                                        </td>
+                                                        <td  class="lastCol op-cl-2">
+                                                            {foreach name="vo['children']" item="vo2"}
+                                                            <div style="float: left; ">
+                                                                <p style="float: left; height: 100%;  margin:auto 10px;">
+                                                                    <label><input type="checkbox" name="" class="checkbox-parent checkbox-child" dataid="id-1-3">{$vo2.name}</label></p>
+                                                                <div style="float: left;">
+                                                                    <div  class="option">
+                                                                        {foreach name="vo2['children']" item="vo3"}
+                                                                        <label style="padding-right:15px;">
+                                                                            <input <?php if(in_array($vo3['id'], $rules)){ echo 'checked="checked"';}?> class="colored-success checkbox-child" id="{$vo3.id}" value="{$vo3.id}" name="rules[]" dataid="id-{$vo.id}-{$vo2.id}-{$vo3.id}" type="checkbox">
+                                                                            <span class="text">{$vo3.name}</span>
+                                                                        </label>
+                                                                        {/foreach}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {/foreach}
+                                                        </td>
+                                                    </tr>
+                                                    {/foreach}
+                                                    </tbody>
+                                                </table>
+                                                <!-- 权限分配 -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary" id="saves" onclick="auth_power('{$power.id}')">保存信息</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Body -->
+    </div>
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+<!--Basic Scripts-->
+{include file="public/foot"}
+<script src="__ADMIN__/js/editors/summernote/summernote.js"></script>
+<script type="text/javascript">
+
+function auth_power(id) {
+   $.ajax({
+       type:'POST',
+       data:$("#power").serialize(),
+       url:"{:url('authGroup/auth_power')}",
+       dataType:'json',
+       success:function () {
+           alert(1111);
+       }
+   })
+}
+</script>
+</body>
+<!--  /Body -->
+</html>
