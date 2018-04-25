@@ -25,7 +25,7 @@
                                     <img src="__ADMIN__/img/avatars/adam-jansen.jpg">
                                 </div>
                                 <section>
-                                    <h2><span class="profile"><span>David Stevenson</span></span></h2>
+                                    <h2><span class="profile"><span>欢迎您，{$Think.Session.user_info.nick_name}</span></span></h2>
                                 </section>
                             </a>
                             <!--Login Area Dropdown-->
@@ -48,8 +48,8 @@
 
                                 <!--/Theme Selector Area-->
                                 <li class="dropdown-footer">
-                                    <a href="login.html">
-                                        Sign out
+                                    <a href="{:url('login/logout')}">
+                                       退出
                                     </a>
                                 </li>
                             </ul>

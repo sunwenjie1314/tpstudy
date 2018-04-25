@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>系统登录</title>
+    <meta name="renderer" content="webkit">
+    <script src="__ADMIN__/js/jquery.min.js"></script>
+    <script src="__ADMIN__/js/bootstrap.js"></script>
+    <link href="__ADMIN__/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "Verdana", "Tahoma", "Lucida Grande", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+            background: url("__ADMIN__/img/bg.jpg") no-repeat center center fixed;
+            background-size: cover;
+        }
+        .form-control {
+            height: 37px;
+        }
+
+        .main_box {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            margin: -200px 0 0 -180px;
+            padding: 15px 20px;
+            width: 360px;
+            height: 400px;
+            min-width: 320px;
+            background: #FAFAFA;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 1px 5px 8px #888888;
+            border-radius: 6px;
+        }
+
+        .login_msg {
+            height: 30px;
+        }
+
+        .input-group > .input-group-addon.code {
+            padding: 0;
+        }
+
+        #captcha_img {
+            cursor: pointer;
+        }
+
+        .main_box .logo img {
+            height: 35px;
+        }
+
+        @media (min-width: 768px) {
+            .main_box {
+                margin-left: -240px;
+                padding: 15px 55px;
+                width: 480px;
+            }
+
+            .main_box .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="main_box">
+        <form id="login_form" method="post" action="">
+            <input type="hidden" value="" id="j_randomKey"/>
+            <input type="hidden" name="jfinal_token" value=""/>
+            <p class="text-center logo"><img src="__ADMIN__/img/logo.png" height="45"></p>
+            <div class="login_msg text-center"><font color="red"></font></div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon-user"><span
+                            class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" class="form-control" id="j_username" name="name" placeholder="登录账号"
+                           aria-describedby="sizing-addon-user">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon-password"><span
+                            class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" id="j_password" name="password" placeholder="登录密码"
+                           aria-describedby="sizing-addon-password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon-repassword"><span
+                            class="glyphicon glyphicon-exclamation-sign"></span></span>
+                    <input type="text" class="form-control" id="j_verify" name="verify" placeholder="验证码"
+                           aria-describedby="sizing-addon-password">
+                    <span class="input-group-addon code" id="basic-addon-code">
+                        <img id="verify_img" src="{:captcha_src()}" alt="验证码" onclick="this.src='{:captcha_src()}'+'?'+Math.random()"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label for="j_remember" class="m"><input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!</label>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" id="login" class="btn btn-primary btn-lg">&nbsp;登&nbsp;录&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-default btn-lg">&nbsp;重&nbsp;置&nbsp;</button>
+            </div>
+            <div class="text-center" style="margin-top: 15px;">
+                <a id="tips"style="text-decoration:none;font-size: 16px;"></a>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        <!-- 给登录按钮添加点击事件 -->
+        $("#login").on('click', function (event) {
+            $.ajax({
+                type: 'post',
+                url: "{:url('checkLogin')}",
+                data: $("#login_form").serialize(),  //序列化表单数据
+                dataType: 'json',
+                success: function (data) {  //只有返回标志为1的时候才进行处理
+                    if(data.status == 0||data.status==2){
+                        $("#tips").html(data.message).css('color','red');
+                        $("#login_form")[0].reset();
+                        setTimeout(function () {
+                            window.location.href = "{:url('index')}";
+                            $("#password").html().removeData;
+                        },2000);
+                    }
+                    if (data.status == 1) {
+                        //alert(data.message);
+                        $("#tips").html(data.message);
+                        window.location.href = "{:url('index/index')}";
+                    }
+                }
+            });
+        })
+    });
+
+    <!-- 刷新验证码的脚本 -->
+    function refreshVerify() {
+        var ts = Date.parse(new Date()) / 1000;
+        $("#verify_img").attr("src", "/captcha?id=" + ts);//刷新验证码
+    }
+</script>
+</body>
+</html>

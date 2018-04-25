@@ -55,17 +55,28 @@
                                             <div class="tab-content tabs-flat">
                                                 <div id="basic_setting" class="tab-pane active">
                                                     <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right">所属模型: </label>
+                                                        <div class="col-sm-6">
+                                                            <select name="model_id">
+                                                                <option value="">选择模型</option>
+                                                                {volist name="modelRes" id="vo"}
+                                                                <option value="{$vo['id']}">{$vo.model_name}</option>
+                                                                {/volist}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">上级栏目: </label>
                                                         <div class="col-sm-6">
-                                                            <select>
-                                                                <option>顶级栏目</option>
+                                                            <select name="pid">
+                                                                <option value="0">顶级栏目</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">栏目名称: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                            <input class="form-control" placeholder="" name="cate_name"  value="" type="text">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
@@ -74,14 +85,12 @@
                                                         <div class="col-sm-6">
                                                             <div class="radio" style="float:left; padding-left:10px;">
                                                                 <label >
-                                                                    <input checked="checked"  name="visible" value=""  type="radio">
+                                                                    <input checked="checked"  name="status" value="1"  type="radio">
                                                                     <span class="text">是</span>
                                                                 </label>
-
-                                                            </div>
-                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                &nbsp; &nbsp; &nbsp; &nbsp;
                                                                 <label>
-                                                                    <input checked=""  name="visible" value=""  type="radio">
+                                                                    <input  name="status" value="0"  type="radio">
                                                                     <span class="text">否</span>
                                                                 </label>
                                                             </div>
@@ -91,24 +100,34 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">栏目图标: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="" placeholder="" name=""  value="" type="file">
+                                                            <span id="uploadify"></span>
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+                                                    <div class="form-group" id="cateImgDiv" style="display: none;">
+                                                        <label class="col-sm-2 control-label no-padding-right"></label>
+                                                        <div id="cateImg" class="col-sm-6"></div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">栏目属性: </label>
                                                         <div class="col-sm-6">
                                                             <div class="radio" style="float:left; padding-left:10px;">
                                                                 <label >
-                                                                    <input checked="checked"  name="1111" value=""  type="radio">
-                                                                    <span class="text">封面频道栏目</span>
+                                                                    <input checked="checked"  name="cate_attr" value="1"  type="radio">
+                                                                    <span class="text">列表页栏目(可以发布文章)</span>
                                                                 </label>
 
                                                             </div>
                                                             <div class="radio" style="float:left; padding-left:10px;">
                                                                 <label>
-                                                                    <input checked=""  name="1111" value=""  type="radio">
-                                                                    <span class="text">列表页栏目</span>
+                                                                    <input  name="cate_attr" value="2"  type="radio">
+                                                                    <span class="text">封面频道栏目(不可以发布文章)</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio" style="float:left; padding-left:10px;">
+                                                                <label>
+                                                                    <input  name="cate_attr" value="3"  type="radio">
+                                                                    <span class="text">外部链接栏目</span>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -117,21 +136,21 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">封面频道栏目模板: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                            <input class="form-control" placeholder="" name="index_tmp"  value="" type="text">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">列表页模板: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                            <input class="form-control" placeholder="" name="list_tmp"  value="" type="text">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">内容页模板: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                            <input class="form-control" placeholder="" name="article_tmp"  value="" type="text">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
@@ -140,7 +159,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">栏目标题: </label>
                                                         <div class="col-sm-6">
-                                                            <input class="form-control" placeholder="" name=""  value="" type="text">
+                                                            <input class="form-control" placeholder="" name="title"  value="" type="text">
                                                         </div>
                                                         <p class="help-block col-sm-4 red">* 必填</p>
                                                     </div>
@@ -154,7 +173,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label no-padding-right">描述: </label>
                                                         <div class="col-sm-6">
-                                                           <textarea class="form-control">
+                                                           <textarea class="form-control" name="desc">
 
                                                            </textarea>
                                                         </div>
@@ -164,7 +183,7 @@
                                                 <div id="profile13" class="tab-pane">
                                                     <div class="form-group">
                                                         <div class="widget-main no-padding">
-                                                            <div id="summernote"></div>
+                                                           <textarea id="summernote" name="content" class="form-control"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,6 +213,32 @@
 <!--Basic Scripts-->
 {include file="public/foot"}
 <script src="__ADMIN__/js/editors/summernote/summernote.js"></script>
+<script src="__ADMIN__/plus/uploadify/jquery.uploadify.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#uploadify").uploadify({
+            'swf':'__ADMIN__/plus/uploadify/uploadify.swf',
+            //后台处理页面
+            'uploader':"{:url('cate/upImg')}",
+            'progressData':'speed',
+            //按钮上的文字
+            'buttonText':"上传文件",
+            'buttonClass':'btn btn-azure shiny',
+            //设定可以选择的附件样式
+            'fileTypeDesc':'Image Files',
+            //设定发送的图片的name值
+            'fileObjName':'img',
+            'onUploadSuccess':function (file,data,response) {
+                $("input[name='img']").val(data);
+                var cateImgSrc="__ADMIN__/uploads/cateimg/"+data;//读取上传的图片的路径
+                var cateimg="<img height='80px'  src='"+cateImgSrc+"'>";   //生成指定规格的预览图
+                $("#cateImgDiv").show();
+                $("#cateImg").html(cateimg);    //将图片放入div
+            }
+        });
+        $("#uploadify-button").removeAttr('style');//移除原来的图标样式
+    })
+</script>
 <script>
     $('#summernote').summernote({ height: 300 });
 </script>

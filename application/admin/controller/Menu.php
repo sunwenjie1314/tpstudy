@@ -24,8 +24,6 @@ class Menu extends Common{
     public function menu_add(){
         $_menus=db('menu')->select();
         $menus=model('menu')->menutree($_menus);
-//        dump($menus);
-//        die();
         $this->assign('menus',$menus);
         if(request()->isPost()){
             $data=input('post.');

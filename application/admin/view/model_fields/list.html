@@ -1,0 +1,143 @@
+﻿{include file="public/head"}
+<!-- /Head -->
+<!-- Body -->
+<body>
+<!-- Navbar -->
+{include file="public/navbar"}
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="public/sidebar"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">首页</a>
+                    </li>
+                    <li class="active"><a href="#">模型管理</a></li>
+                    <li class="active">字段列表</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-header ">
+                                <span class="widget-caption">新增字段</span>
+                            </div>
+                            <div class="widget-body">
+                                <div class="table-toolbar">
+                                    <a href="{:url('ModelFields/model_fields_add')}" class="btn btn-success">新增字段</a>
+                                </div>
+                                <div id="editabledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                    <table class="table table-striped table-hover table-bordered dataTable no-footer" id="editabledatatable" role="grid" aria-describedby="editabledatatable_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 5%;">ID</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 15%;">字段中文名称</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 15%;">字段英文名称</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 10%;">字段类型</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 10%;">所属模型</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 25%;">可选值</th>
+                                            <th class="sorting_asc"  rowspan="1" colspan="1"  style="width: 20%;">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {volist name="data"  id="vo"}
+                                        <tr role="row">
+                                            <!--字段类型：1：单行文本 2：单选安按钮 3：复选框 4：下拉菜单 5：文本域 6：附件 7：浮点 8：整型 9：长文本类型 longtext-->
+                                            <td>{$vo.id}</td>
+                                            <td>{$vo.field_cname}</td>
+                                            <td>{$vo.field_ename}</td>
+                                            <td>{switch $vo.field_type}
+                                                {case 1}单行文本{/case}
+                                                {case 2}单选按钮{/case}
+                                                {case 3}复选框{/case}
+                                                {case 4}下拉菜单{/case}
+                                                {case 5}文本域{/case}
+                                                {case 6}附件{/case}
+                                                {case 7}浮点{/case}
+                                                {case 8}整形{/case}
+                                                {case 9}长文本类型{/case}
+                                                {/switch}
+                                            </td>
+                                            <td>{$vo.model_name}</td>
+                                            <td>{$vo.field_values}</td>
+                                            <td>
+                                                <a href="{:url('model_fields_edit',array('id'=>$vo['id']))}" class="btn btn-info btn-xs edit" onclick=""><i class="fa fa-edit"></i> 编辑</a>
+                                                <a onclick="model_fields_del(this,'{$vo.id}','{$vo.model_id}')"class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i> 删除</a>
+                                            </td>
+                                        </tr>
+                                        {/volist}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row DTTTFooter" style="margin-top: 10px;">
+                                    <div class="col-sm-6">
+                                        每页显示
+                                        <label>
+                                            <select name="editabledatatable_length" class="form-control input-sm">
+                                                <option value="5">5</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="100">100</option>
+                                                <option value="-1">All</option>
+                                            </select>
+                                        </label>
+                                        条
+                                    </div>
+                                    <div class="col-sm-6">
+                                            {$page}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+</div>
+<!-- /Page Container -->
+<!-- Main Container -->
+</div>
+<!--Basic Scripts-->
+{include file="public/foot"}
+<script type="text/javascript">
+    function model_fields_del(obj,id,modelId) {
+        layer.confirm('确定要删除该模型吗?',{icon:3,title:'提示'},function () {
+          $.ajax({
+              type:"post",
+              data:{id:id,modelId:modelId},
+              dataType:"Json",
+              url:"{:url('ModelFields/model_fields_del')}",
+              success:function (data) {
+                  layer.msg(data);
+                  if (data==1){
+                      layer.msg("删除模型成功!",{icon:1});
+                      window.location.href="{:url('ModelFields/model_fields_list')}"
+                  }else{
+                      layer.msg("删除模型失败!",{icon:2});
+                  }
+              }
+          });
+          layer.close(index);
+        });
+    }
+</script>
+</body>
+<!--  /Body -->
+</html>

@@ -11,6 +11,24 @@ class Cate extends Common{
         return $this->view->fetch('list');
     }
     public function cate_add(){
+        if(request()->isPost()){
+            $data=input('post.');
+            dump($data);
+            die();
+            return;
+        }
+        $modelRes=db('model')->field('id,model_name')->select();
+        $this->assign(['modelRes'=>$modelRes]);
         return $this->view->fetch('add');
+    }
+    public function upImg(){
+        $file=request()->file('img');
+        $info=$file->move(ROOT_PATH.'public/static/admin/uploads/cateimg');
+        if ($info){
+            //成功上传图片后获取上传信息
+            echo $info->getSaveName();
+        }else{
+            echo $info->getError();
+        }
     }
 }
